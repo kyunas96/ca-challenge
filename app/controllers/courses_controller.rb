@@ -6,10 +6,18 @@ class CoursesController < ApplicationController
   end
 
   def show
+    course = Course.find_by(id: course_params[:id])
+
+    if(course)
+      render json: course
+    else
+      render json: {error: "exist"}
+    end
 
   end
 
   def create
+    course = 
 
   end
 
@@ -19,6 +27,10 @@ class CoursesController < ApplicationController
 
   def destroy
 
+  end
+
+  def course_params
+    params.permit(:id, :name, :release_date)
   end
 
 end
