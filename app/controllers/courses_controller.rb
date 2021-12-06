@@ -24,7 +24,6 @@ class CoursesController < ApplicationController
 
     # course_params[:release_date] must be a hash that has values for month,
     # day, year and time
-    p "course params: " + course_params[:release_date].inspect
 
     formatted_release_date = DateTime.new(
       course_params[:release_date][:year].to_i,
@@ -48,8 +47,6 @@ class CoursesController < ApplicationController
       render json: {error: "Unable to save course"}
       return
     end
-
-    # render json: {error: "Unable to save course"}
   end
 
   def update
@@ -67,7 +64,6 @@ class CoursesController < ApplicationController
     end
 
     if(course)
-      p "Updating"
       course.name = course_params[:name] ? course_params[:name] : course.name
       course.release_date = new_release_date ? new_release_date : course.release_date
       course.updated_at = DateTime.now
@@ -81,6 +77,7 @@ class CoursesController < ApplicationController
       end
     else
       render json: {error: "Course does not exist"}
+      return
     end
   end
 
@@ -93,8 +90,10 @@ class CoursesController < ApplicationController
     if(course)
       course.destroy
       render json: {message: "Course successfully deleted"}, status: 200
+      return
     else
       render json: {error: "Course does not exist"}, status: 422
+      return
     end
 
   end
