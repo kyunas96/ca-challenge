@@ -100,9 +100,21 @@ class CoursesController < ApplicationController
 
 
 =begin
+Postman form structure
+[name] : string
+[release_date][year] : string
+[release_date][month] : string
+[release_date][day] : string
+[release_date][hour] : string
+[release_Date][minute] : string
+=end
+
+=begin
+course_params return value
   course_params: {
     name: string,
     release_date: {
+      year: string,
       month: string,
       day: string,
       hour: string,
